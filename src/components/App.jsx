@@ -6,12 +6,12 @@ class App extends React.Component {
       youTubeData: exampleVideoData,
       searchQueryText: 'panda'
     };
-    this.handler = this.handler.bind(this);
+    this.handleListEntryClick = this.handleListEntryClick.bind(this);
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
-    searchYouTube(this.state.searchQueryText, this.setYouTubeData.bind(this));
+    this.sendRequest = debounce(searchYouTube, 500, false);
   }
 
-  handler(arg) {
+  handleListEntryClick(arg) {
     this.setState({
       currentVideo: arg
     });
@@ -28,7 +28,7 @@ class App extends React.Component {
     this.setState({
       searchQueryText: arg
     });
-    searchYouTube(arg, this.setYouTubeData.bind(this));
+    this.sendRequest(arg, this.setYouTubeData.bind(this));
   }
 
   render() {
@@ -36,20 +36,23 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><Search action={this.updateSearchQuery}/></div>
+            <div><Search updateSearchQuery={this.updateSearchQuery}/></div>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
             <div><VideoPlayer video={this.state.currentVideo}/></div>
+            <div className="commentBox"><CommentsList video={this.state.currentVideo}/></div>
           </div>
           <div className="col-md-5">
-            <div><VideoList action={this.handler} videos={this.state.youTubeData} /></div>
+            <div><VideoList handleListEntryClick={this.handleListEntryClick} videos={this.state.youTubeData} /></div>
           </div>
+
         </div>
       </div>
     );
   }
+
 }
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope

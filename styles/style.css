@@ -96,6 +96,29 @@ h5 {
   }
 
   .video-player {
-    margin-right: 20px;
+    margin-right: 50px;
   }
+}
+
+
+.commentBox{
+  margin: 20px 10px;
+}
+
+.userName{
+  font-weight: bold;
+  display: inline-block;
+}
+
+.image{
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.comment{
+  margin: 30px 20px;
+}
+
+.text{
+  margin-left: 40px;
 }

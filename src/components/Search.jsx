@@ -2,7 +2,8 @@ var Search = (props) => {
 
   var handleClick = function() {
     var text = document.getElementById('searchField').value;
-    props.action.call(null, text );
+    props.updateSearchQuery( text );
+    // debugger
   };
 
   return (
